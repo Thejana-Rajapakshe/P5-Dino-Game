@@ -10,7 +10,7 @@ const P5Component = () => {
 
     useEffect(() => {
         const p5Instance = new p5(sketch, p5ContainerRef.current);
-        
+
         return () => {
             p5Instance.remove();
         }        

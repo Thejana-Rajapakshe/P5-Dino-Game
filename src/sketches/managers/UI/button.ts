@@ -1,7 +1,6 @@
 import p5, { Vector } from "p5";
 import UIElement from "./UIElement";
-import Game from "../../game";
-
+import { game } from "../../mainSketch";
 class Button extends UIElement {
     private label: string;
     private action() {}
@@ -10,7 +9,7 @@ class Button extends UIElement {
         super(pos, size);
         this.label = label;
         this.action = action;
-        Game.inputMan.addBinding(undefined, this.pos, this.size, action);        
+        game.inputMan.addBinding(undefined, this.pos, this.size, action);        
     }
 
 

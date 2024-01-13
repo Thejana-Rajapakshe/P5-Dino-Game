@@ -15,7 +15,7 @@ class EntityManager {
     }
 
     public update() {
-        this.entities = this.entities.filter((entity) => entity.isAlive);
+        this.entities = this.entities.filter((entity) => entity.isAlive());
         this.checkCollisions();
         this.entities.forEach((entity) => {
             entity.update();

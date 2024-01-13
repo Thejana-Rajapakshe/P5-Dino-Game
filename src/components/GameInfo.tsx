@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import Game from "../sketches/game";
+import { game } from "../sketches/mainSketch";
 import { gameEvent } from "../sketches/gameInfo";
 
 const GameInfo = () => {
     const [highScore, setHighScore] = useState(0);
     
     useEffect(() => {
-        setTimeout(() => Game.gameEvents.add(gameEvent.newHighScore, setHighScore), 1000);
+        setTimeout(() => game.gameEvents.add(gameEvent.newHighScore, setHighScore), 10);
     })
 
     return (

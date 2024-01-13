@@ -39,7 +39,7 @@ class BaseEntity {
     getAcc() {return this.acceleration;}
     getVel() {return this.velocity;}
     getSize() {return this.size;}
-    isAlive() {return this.isAlive;}
+    isAlive() {return this.alive;}
 }
 
 export default BaseEntity;

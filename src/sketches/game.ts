@@ -10,78 +10,91 @@ import Obstacle from "./managers/Entity/obstacle";
 
 interface gameInfo {
     p: p5,
+    score: number,
     canvasSize: Vector,
 }
 
 class Game {
-    static info : gameInfo =  {p: null as any, canvasSize: null as any};
-    static inputMan : InputManager;
-    static uiMan: UIManager;
-    static gameEvents : gameInfoEvent;
-    static entityMan : EntityManager;
+    public info : gameInfo =  {p: null as any, score: 0, canvasSize: null as any};
+    public inputMan : InputManager;
+    public uiMan: UIManager;
+    public gameEvents : gameInfoEvent;
+    public entityMan : EntityManager;
     
-    static gameOver: boolean = false;
+    public gameOver: boolean = false;
     constructor(p : p5, canvasSize: Vector) {
-        Game.info.canvasSize = canvasSize;
-        Game.info.p = p;
+        this.info.canvasSize = canvasSize;
+        this.info.p = p;
 
-        Game.inputMan = new InputManager(p);
-        Game.uiMan = new UIManager();
-        Game.gameEvents = new gameInfoEvent();
-        Game.entityMan = new EntityManager();
+        this.inputMan = new InputManager(p);
+        this.uiMan = new UIManager();
+        this.gameEvents = new gameInfoEvent();
+        this.entityMan = new EntityManager();
         
-
-        Game.entityMan.add(
-            new Dino(
-                new Vector(0, 0), 
-                new Vector(0, 0), 
-                new Vector(20, 0), 
-                new Vector(10, 10)
-            )
-        );
-        
-        Game.uiMan.addUiElement(
-            new Button(
-                new Vector(Game.info.canvasSize.x/2, Game.info.canvasSize.y/2),
-                new Vector(90, 30),
-                "Restart",
-                () => {Game.gameOver = false; Game.entityMan.removeByType(Obstacle)}
-            )
-        );
+        //if setTimeout isn't used, it will result in a reference error science the 
+        //enetityMan and uiMan is not yet fully initialized
+        setTimeout(() => {
+            this.entityMan.add(
+                new Dino(
+                    new Vector(0, 0), 
+                    new Vector(0, 0), 
+                    new Vector(20, 0), 
+                    new Vector(10, 10)
+                )
+            );
+            
+            this.uiMan.addUiElement(
+                new Button(
+                    new Vector(this.info.canvasSize.x/2, this.info.canvasSize.y/2),
+                    new Vector(90, 30),
+                    "Restart",
+                    () => {this.gameOver = false; this.entityMan.removeByType(Obstacle)}
+                )
+            );
+        })
         
         p.createCanvas(canvasSize.x, canvasSize.y);
         p.background(100);
     }
+
+    init() {
+        
+    }
     
     update() {
-        if(Game.gameOver){
+        if(this.gameOver){
             return;
         }
 
         this.addObstacles();
 
-        Game.entityMan.update();
+        this.entityMan.update();
     }
 
     private addObstacles() {
-        let randInt: number = Game.info.p.random(1);
+        let randInt: number = this.info.p.random(1);
         if(randInt < 0.005 && randInt > 0.001){
-            Game.entityMan.add(new Obstacle(
+            this.entityMan.add(new Obstacle(
                 new Vector(-1, 0), 
                 new Vector(-randInt, 0), 
-                new Vector(Game.info.canvasSize.x, Game.info.canvasSize.y-randInt*10000),
+                new Vector(this.info.canvasSize.x, this.info.canvasSize.y-randInt*10000),
                 new Vector(10 ,randInt*10000)
                 ));
         }
     }
 
     draw() {
-        Game.info.p.background(200); //this should be in top
+        this.info.p.background(200); //this should be in top
         
-        Game.entityMan.draw(Game.info.p);
+        this.entityMan.draw(this.info.p);
 
-        if(!Game.gameOver) return;
-        Game.uiMan.draw(Game.info.p);
+        if(!this.gameOver) return;
+        this.uiMan.draw(this.info.p);
+    }
+
+    incrementScore() {
+        console.log('incrementing score');
+        this.info.score++; 
     }
 
 }
