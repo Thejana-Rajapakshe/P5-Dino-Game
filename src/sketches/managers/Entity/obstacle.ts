@@ -1,7 +1,7 @@
 import p5, { Vector } from "p5";
 import BaseEntity from "./baseEntity";
-import Game from "../../game";
 import { game } from "../../mainSketch";
+import { sharedContext } from "../../game";
 import { gameEvent } from "../../gameInfo";
 
 class Obstacle extends BaseEntity {
@@ -26,7 +26,7 @@ class Obstacle extends BaseEntity {
         if(this.position.x < -this.size.x){
             this.alive = false;
             game.incrementScore();
-            game.gameEvents.emit(gameEvent.newHighScore, game.info.score);
+            sharedContext.gameEvents.emit(gameEvent.newHighScore, sharedContext.gameInfo.score);
         }
     }
 

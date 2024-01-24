@@ -1,7 +1,7 @@
 import p5, { Vector } from "p5";
 import BaseEntity from "./baseEntity";
 import { collideRectRect } from "p5collide";
-import { game } from "../../mainSketch";
+import { sharedContext } from "../../game";
 
 
 class EntityManager {
@@ -82,7 +82,7 @@ class EntityManager {
                     bottomCollided = true;
                 }
 
-                if(w2 >= game.info.canvasSize.x+20){
+                if(w2 >= sharedContext.gameInfo.canvasSize.x+20){
                     console.log(x1+w1 >= x2, x1+w1 < x2+w2, y1 <= y2+h2, y1+w1-5 >= y2)
                 }
                 if(x1+w1 >= x2 && x1+w1 < x2+w2 && y1 <= y2+h2 && y1+w1-10 >= y2){

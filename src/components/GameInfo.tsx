@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { game } from "../sketches/mainSketch";
+import { sharedContext } from "../sketches/game";
 import { gameEvent } from "../sketches/gameInfo";
 
 const GameInfo = () => {
     const [highScore, setHighScore] = useState<number>(0);
     
     useEffect(() => {
-        setTimeout(() => game.gameEvents.add(gameEvent.newHighScore, setHighScore), 10);
+        setTimeout(() => sharedContext.gameEvents.add(gameEvent.newHighScore, setHighScore), 10);
     })
 
     return (

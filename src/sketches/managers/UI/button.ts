@@ -1,6 +1,6 @@
 import p5, { Vector } from "p5";
 import UIElement from "./UIElement";
-import { game } from "../../mainSketch";
+import { sharedContext } from "../../game";
 class Button extends UIElement {
     private label: string;
     private action() {}
@@ -9,7 +9,7 @@ class Button extends UIElement {
         super(pos, size);
         this.label = label;
         this.action = action;
-        game.inputMan.addBinding(undefined, this.pos, this.size, action);        
+        sharedContext.inputMan.addBinding(undefined, this.pos, this.size, action);        
     }
 
 

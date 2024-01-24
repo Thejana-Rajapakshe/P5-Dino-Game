@@ -1,6 +1,6 @@
 import { Vector } from "p5";
 import BaseEntity from "./baseEntity";
-import { game } from "../../mainSketch";
+import { sharedContext } from "../../game";
 import Obstacle from "./obstacle";
 
 
@@ -9,7 +9,7 @@ class Dino extends BaseEntity {
 
     constructor(vel : Vector, acc : Vector, pos: Vector, size: Vector){
         super(vel, acc, pos, size);
-        game.inputMan.addBinding(game.info.p.UP_ARROW, undefined, undefined, () => {this.jump(10)});
+        sharedContext.inputMan.addBinding(sharedContext.p.UP_ARROW, undefined, undefined, () => {this.jump(10)});
     }
 
     jump(force: number) {
@@ -22,11 +22,11 @@ class Dino extends BaseEntity {
     
     update() {
         super.update();
-        this.position.y = game.info.p.constrain(this.position.y, 0, game.info.canvasSize.y - this.size.y);
-        this.position.x = game.info.p.constrain(this.position.x, 0, game.info.canvasSize.x - this.size.x);
+        this.position.y = sharedContext.p.constrain(this.position.y, 0, sharedContext.gameInfo.canvasSize.y - this.size.y);
+        this.position.x = sharedContext.p.constrain(this.position.x, 0, sharedContext.gameInfo.canvasSize.x - this.size.x);
         if(this.collideYbottom && this.jumped){
             this.jumped = false;
-            game.camera.shake(0.1)
+            sharedContext.camera.shake(0.1)
         }
 
         !this.collideYbottom ? this.gravity(0.4): this.velocity.y = 0;
@@ -34,7 +34,7 @@ class Dino extends BaseEntity {
 
     collide(entity: BaseEntity): void {
         if(entity instanceof Obstacle){
-            game.info.gameOver = true;
+            sharedContext.gameInfo.gameOver = true;
         }
 
     }

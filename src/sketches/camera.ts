@@ -1,6 +1,5 @@
 import { Vector } from "p5";
-import { game } from "./mainSketch";
-
+import { sharedContext } from "./game";
 class Camera {
     private position : Vector;
 
@@ -19,8 +18,8 @@ class Camera {
     }
 
     update() {
-        let noise = game.info.p.noise;
-        let frameCount = game.info.p.frameCount;
+        let noise = sharedContext.p.noise;
+        let frameCount = sharedContext.p.frameCount;
         let noiseScale = 1;
         let shakeIntensity = 15;
 

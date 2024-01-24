@@ -1,6 +1,6 @@
 import p5, { Color, Vector } from "p5"
 import Camera from "../../camera";
-import { game } from "../../mainSketch";
+import { sharedContext } from "../../game";
 
 class BaseEntity {
     protected alive: boolean = true;
@@ -27,8 +27,8 @@ class BaseEntity {
         p.fill(225);
         p.stroke(0);
 
-        let x = this.position.x - game.camera.getX();
-        let y = this.position.y - game.camera.getY();
+        let x = this.position.x - sharedContext.camera.getX();
+        let y = this.position.y - sharedContext.camera.getY();
         p.rect(x, y, this.size.x, this.size.y);
     }
 
