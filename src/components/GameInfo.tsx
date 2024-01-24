@@ -3,7 +3,7 @@ import { game } from "../sketches/mainSketch";
 import { gameEvent } from "../sketches/gameInfo";
 
 const GameInfo = () => {
-    const [highScore, setHighScore] = useState(0);
+    const [highScore, setHighScore] = useState<number>(0);
     
     useEffect(() => {
         setTimeout(() => game.gameEvents.add(gameEvent.newHighScore, setHighScore), 10);

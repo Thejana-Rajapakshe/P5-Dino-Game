@@ -20,7 +20,7 @@ class gameInfoEvent {
     public emit(event: gameEvent, data? : any) {
         this.listeners.forEach((listener) => {
             if(listener.event === event){
-                data ?  listener.callback(data) : listener.callback();
+                data!==undefined ?  listener.callback(data) : listener.callback();
             }
         })
     }
