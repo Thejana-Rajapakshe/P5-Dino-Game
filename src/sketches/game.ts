@@ -108,12 +108,14 @@ class Game {
     private addObstacles() {
         let randInt: number = sharedContext.p.random(1);
         if(randInt < 0.005 && randInt > 0.001){
-            sharedContext.entityMan.add(new Obstacle(
+            let obstacle = new Obstacle(
                 new Vector(-1, 0), 
                 new Vector(-randInt, 0), 
                 new Vector(sharedContext.gameInfo.canvasSize.x, sharedContext.gameInfo.canvasSize.y-randInt*10000-30),
                 new Vector(15 ,randInt*10000)
-                ));
+                );
+            obstacle.setOnDelete(() => {this.incrementScore();})
+            sharedContext.entityMan.add(obstacle);
         }
     }
 

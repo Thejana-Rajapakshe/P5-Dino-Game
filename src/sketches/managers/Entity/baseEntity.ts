@@ -54,6 +54,10 @@ class BaseEntity {
         this.acceleration.y += this.velocity.y;
     }
 
+    onDelete() {
+
+    }
+
     collide(entity: BaseEntity) {
         
     }
@@ -66,6 +70,7 @@ class BaseEntity {
     setCollideBottom(state: boolean){this.collideYbottom = state;}
     setCollideLeft(state: boolean){this.collideXleft = state;}
     setCollideRight(state: boolean){this.collideXright = state;}
+    setOnDelete(callback: () => void){ this.onDelete = callback;}
 
 
     getPos() {return this.position;}

@@ -1,6 +1,5 @@
 import p5, { Vector } from "p5";
 import BaseEntity from "./baseEntity";
-import { game } from "../../mainSketch";
 import { sharedContext } from "../../game";
 import { gameEvent } from "../../gameInfo";
 
@@ -25,7 +24,7 @@ class Obstacle extends BaseEntity {
     remove() {
         if(this.position.x < -this.size.x){
             this.alive = false;
-            game.incrementScore();
+            this.onDelete();
             sharedContext.gameEvents.emit(gameEvent.newHighScore, sharedContext.gameInfo.score);
         }
     }
